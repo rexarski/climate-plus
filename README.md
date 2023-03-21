@@ -28,3 +28,14 @@ exit
   - scrapes corresponding pdfs and store them in `/data/pdf` directory (unparsed)
   - parses the pdfs to extract the text and store them in `/data/txt` directory
   - Note: some urls are invalid and some pdfs are not readable. Those text files are dropped.
+
+## Todos
+
+- [ ] Prepare datasets compatible with ClimateBERT
+  - [ ] climate-fever
+  - [ ] TCFD data
+    - [x] Data scraping
+    - [ ] Generate sentence-based data using [`chitchat`](https://github.com/rexarski/chitchat) (QA)
+- [ ] Train ClimateBERT for downstream task 1 (factchecking)
+- [ ] Train ClimateBERT for downstream task 2 (TCFD classification)
+- [ ] Generate a documentation website for `climate-plus`
