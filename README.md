@@ -1,7 +1,7 @@
 # climate-plus
 
 <p align="center">
-  <img src="logo.png" width="50%" alt="Image description">
+  <img src="logo.png" width="40%" alt="A placeholder logo of climate-plus">
 </p>
 
 ## poetry
