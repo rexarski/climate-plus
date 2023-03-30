@@ -27,7 +27,7 @@ exit
 - Also in `/utils`, `parse_pdf.ipynb`:
   - scrapes corresponding pdfs and store them in `/data/pdf` directory (unparsed)
   - parses the pdfs to extract the text and store them in `/data/txt` directory
-  - Note: some urls are invalid and some pdfs are not readable. Those text files are dropped.
+  - Note: some urls are invalid and some pdfs are not readable (as the urls are linked to an actual website, or files in other formats.) Those text files are dropped.
 
 ## Todos
 
