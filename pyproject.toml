@@ -13,12 +13,13 @@ black = "^23.1.0"
 requests = "^2.28.2"
 pandas = "^1.5.3"
 selenium = "^4.8.2"
-pypdf2 = "^3.0.1"
 tqdm = "^4.65.0"
 thefuzz = "^0.19.0"
 openai = "^0.27.4"
 langchain = "^0.0.136"
 faiss-cpu = "^1.7.3"
+pypdf = "^3.7.1"
+pycryptodome = "^3.17"
 
 
 [tool.poetry.group.dev.dependencies]

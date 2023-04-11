@@ -11,6 +11,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import VectorStore
 from langchain.vectorstores.faiss import FAISS
 from prompts import STUFF_PROMPT
+from pypdf import PdfReader
 
 
 def parse_txt(file: BytesIO) -> str:
@@ -19,6 +20,23 @@ def parse_txt(file: BytesIO) -> str:
     text = re.sub(r"\n\s*\n", "\n\n", text)
 
     return {"text": text, "file": file.name}
+
+
+def parse_pdf(file: BytesIO) -> List[str]:
+    pdf = PdfReader(file)
+    output = []
+    for page in pdf.pages:
+        text = page.extract_text()
+        # Merge hyphenated words
+        text = re.sub(r"(\w+)-\n(\w+)", r"\1\2", text)
+        # Fix newlines in the middle of sentences
+        text = re.sub(r"(?<!\n\s)\n(?!\s\n)", " ", text.strip())
+        # Remove multiple newlines
+        text = re.sub(r"\n\s*\n", "\n\n", text)
+
+        output.append({"text": text, "file": file.name})
+
+    return output
 
 
 def text_to_docs(cands: List[dict]) -> List[Document]:
@@ -113,19 +131,19 @@ def get_answer(docs: List[Document], query: str) -> Dict[str, Any]:
     return answer
 
 
-def get_sources(
-    answer: Dict[str, Any], _docs: List[Document]
-) -> List[Document]:
-    """Gets the source documents for an answer."""
+# def get_sources(
+#     answer: Dict[str, Any], _docs: List[Document]
+# ) -> List[Document]:
+#     """Gets the source documents for an answer."""
 
-    # Get sources for the answer
-    source_keys = [
-        s for s in answer["output_text"].split("[SOURCES]:")[-1].split(", ")
-    ]
+#     # Get sources for the answer
+#     source_keys = [
+#         s for s in answer["output_text"].split("[SOURCES]:")[-1].split(", ")
+#     ]
 
-    source_docs = []
-    for doc in _docs:
-        if doc.metadata["source"] in source_keys:
-            source_docs.append(doc)
+#     source_docs = []
+#     for doc in _docs:
+#         if doc.metadata["source"] in source_keys:
+#             source_docs.append(doc)
 
-    return source_docs
+#     return source_docs
