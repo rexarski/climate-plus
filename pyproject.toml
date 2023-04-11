@@ -16,10 +16,14 @@ selenium = "^4.8.2"
 pypdf2 = "^3.0.1"
 tqdm = "^4.65.0"
 thefuzz = "^0.19.0"
+openai = "^0.27.4"
+langchain = "^0.0.136"
+faiss-cpu = "^1.7.3"
 
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.21.3"
+black = "^23.3.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -198,7 +198,7 @@ cython_debug/
 
 ### Python Patch ###
 # Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
-poetry.toml
+# poetry.toml
 
 # ruff
 .ruff_cache/
@@ -208,6 +208,8 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python
 
-# Data storage
+# project specific
 data/pdf/
 data/txt/
+config.ini
+*.pyc
