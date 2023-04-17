@@ -1,6 +1,12 @@
 from langchain.prompts import PromptTemplate
 
-template = """Extract 5 most representative sentences from the given source context to reflect its TCFD classification, which is Strategy. The sentences should be exactly the same as original documents.
+template = """
+We have excerpts of a company's report on climate-related contents, and the excerpts have been labeled as Strategy a) in terms of TCFD recommended classification. We want to further extract 5 most representative sentences from the excerpts that could support an answer "YES" to the question. The question is as follows:
+
+Does the company describe the climate-related risks or opportunities it has identified?
+
+The sentences should be exactly the same as original documents.
+
 ===========
 [SOURCE]: STRESS TESTING OUR PORTFOLIO AGAINST THIRD-PARTY CLIMATE SCENARIOS
 STRESS TESTING OUR PORTFOLIO AGAINST THIRD-PARTY CLIMATE SCENARIOS
@@ -25,8 +31,11 @@ Our effort was guided by a steering group consisting of members from our financi
 However, these plants have indirect carbon exposure if the credit quality of our off-takers deteriorates due to carbon pricing.
 
 ----------
+We have excerpts of a company's report on climate-related contents, and the excerpts have been labeled as {disclosure} in terms of TCFD recommended classification. We want to further extract 5 most representative sentences from the excerpts that could support an answer "YES" to the question. The question is as follows:
 
-Extract 5 most representative sentences from the given source context to reflect its TCFD classification, which is {disclosure}. The sentences should be exactly the same as original documents.
+{question}
+
+The sentences should be exactly the same as original documents.
 ===========
 {summaries}
 ===========
@@ -34,5 +43,5 @@ Extract 5 most representative sentences from the given source context to reflect
 """
 
 STUFF_PROMPT = PromptTemplate(
-    template=template, input_variables=["summaries", "disclosure"]
+    template=template, input_variables=["summaries", "disclosure", "question"]
 )

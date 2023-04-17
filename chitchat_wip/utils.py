@@ -106,7 +106,9 @@ def search_docs(_index: VectorStore, query: str) -> List[Document]:
     return docs
 
 
-def get_answer(docs: List[Document], query: str) -> Dict[str, Any]:
+def get_answer(
+    docs: List[Document], disclosure: str, question: str
+) -> Dict[str, Any]:
     """Gets an answer to a question from a list of Documents."""
 
     # Get the answer
@@ -126,7 +128,12 @@ def get_answer(docs: List[Document], query: str) -> Dict[str, Any]:
     #     Cohere(temperature=0), chain_type="stuff", prompt=STUFF_PROMPT  # type: ignore
     # )
     answer = chain(
-        {"input_documents": docs, "disclosure": query}, return_only_outputs=True
+        {
+            "input_documents": docs,
+            "disclosure": disclosure,
+            "question": question,
+        },
+        return_only_outputs=True,
     )
     return answer
 

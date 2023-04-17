@@ -56,8 +56,9 @@ exit
     - [x] Generate sentence-based data using [`chitchat`](https://github.com/rexarski/chitchat) (QA)
       - [x] pdf parser
     - [x] Convert to a datasets object
-    - [ ] Update model card of [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
+    - [x] Update model card of [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
   - [ ] climate-fever
 - [ ] Train ClimateBERT for downstream task 1 (factchecking)
+  - [ ]
 - [ ] Train ClimateBERT for downstream task 2 (TCFD classification)
 - [ ] Generate a documentation website for `climate-plus`
