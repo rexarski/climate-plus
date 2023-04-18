@@ -48,6 +48,12 @@ exit
 > 2. those sentences are distinguishable enough to be used as a classification boundary;
 > 3. the page numbers provided are accurate and complete.
 
+## Restructure `climate_fever`
+
+- The original [`climate_fever` dataset](https://huggingface.co/datasets/climate_fever) needs some refinement for training.
+  - For each `claim`, the `evidence` is a list of sentences. Our tweak here is to expand the list so that each claim-evidence pair only has two sentences (1 claim and 1 evidence).
+  - The updated dataset is named after `climate_fever_fixed` ("fixed-length") and is available [here](https://huggingface.co/datasets/rexarski/climate_fever_fixed).
+
 ## Todos
 
 - [ ] Prepare datasets compatible with ClimateBERT
