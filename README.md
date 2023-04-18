@@ -36,11 +36,11 @@ exit
   - Originally, we let the **"PDF to txt"** conversion to filter out those unreadable pdfs from invalid urls. However, the issue is that the conversion is not perfect, which retains the majority of the messy contents. Therefore, the number of tokens and its processing time are significantly increased.
   - And we decide to manually modify the pdf files and only keep the corresponding pages.
 
-## Push the dataset to Hugging Face
+## Push the dataset to Hugging Face 🤗
 
 - Upload the dataset to Hugging Face.
   - Run `huggingface-cli login` in terminal to log in to Hugging Face account.
-  - Run `python chitchat_wip/huggingface_uploader.py` to upload the dataset object to Hugging Face.
+  - Run `python chitchat_wip/tcfd_uploader.py` to upload the dataset object to Hugging Face.
 
 > Caution ⚠️: The whole process of generating classification-defining sentences is still a long-shot which assumes that
 >
@@ -57,8 +57,18 @@ exit
       - [x] pdf parser
     - [x] Convert to a datasets object
     - [x] Update model card of [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
-  - [ ] climate-fever
+  - [x] [`climate-fever`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
+    - [ ] Update model card if possible
 - [ ] Train ClimateBERT for downstream task 1 (factchecking)
-  - [ ]
 - [ ] Train ClimateBERT for downstream task 2 (TCFD classification)
-- [ ] Generate a documentation website for `climate-plus`
+- [x] Generate a documentation website for `climate-plus`
+  - [ ] Data preparation
+    - [x] Scraping TCFD reports
+    - [ ] Extracting evidence from TCFD reports
+    - [ ] Transforming existing data into transformer-compatible datasets
+    - [ ] Fixing `climate_fever`
+  - [ ] Model training
+    - [ ] Downstream task 1: factchecking
+    - [ ] Downstream task 2: TCFD disclosure classification
+  - [ ] Comparison with benchmarks
+  - [ ] Conclusion

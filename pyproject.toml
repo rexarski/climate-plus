@@ -21,6 +21,7 @@ faiss-cpu = "^1.7.3"
 pypdf = "^3.7.1"
 pycryptodome = "^3.17"
 datasets = "^2.11.0"
+torch = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
