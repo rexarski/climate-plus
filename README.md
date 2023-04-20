@@ -64,7 +64,7 @@ exit
     - [x] Convert to a datasets object
     - [x] Update model card of [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
   - [x] [`climate-fever`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
-    - [ ] Update model card if possible
+    - [ ] Update model card
 - [ ] Train ClimateBERT for downstream task 1 (factchecking)
 - [ ] Train ClimateBERT for downstream task 2 (TCFD classification)
 - [x] Generate a documentation website for `climate-plus`
