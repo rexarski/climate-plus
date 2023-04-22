@@ -54,6 +54,16 @@ exit
   - For each `claim`, the `evidence` is a list of sentences. Our tweak here is to expand the list so that each claim-evidence pair only has two sentences (1 claim and 1 evidence).
   - The updated dataset is named after `climate_fever_fixed` ("fixed-length") and is available [here](https://huggingface.co/datasets/rexarski/climate_fever_fixed).
 
+## Install the minimal python package
+
+```bash
+# cd to the root directory of the project
+pip install -e ./minipackage
+
+# unit tests of the package
+pytest ./minipackage/tests
+```
+
 ## Todos
 
 - [ ] Prepare datasets compatible with ClimateBERT
@@ -65,7 +75,7 @@ exit
     - [x] Update model card of [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
   - [x] [`climate-fever`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
     - [ ] Update model card
-- [ ] Train ClimateBERT for downstream task 1 (factchecking)
+- [x] Train ClimateBERT for downstream task 1 (factchecking)
 - [ ] Train ClimateBERT for downstream task 2 (TCFD classification)
 - [x] Generate a documentation website for `climate-plus`
   - [ ] Data preparation
@@ -76,5 +86,4 @@ exit
   - [ ] Model training
     - [ ] Downstream task 1: factchecking
     - [ ] Downstream task 2: TCFD disclosure classification
-  - [ ] Comparison with benchmarks
   - [ ] Conclusion

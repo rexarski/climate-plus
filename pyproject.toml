@@ -23,6 +23,8 @@ pycryptodome = "^3.17"
 datasets = "^2.11.0"
 torch = "^2.0.0"
 transformers = "^4.28.1"
+jupyter-black = "^0.3.3"
+pytest = "^7.3.1"
 
 
 [tool.poetry.group.dev.dependencies]
