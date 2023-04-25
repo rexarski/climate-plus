@@ -127,4 +127,7 @@ df = pd.DataFrame({"question": qlist, "text": answer_list, "label": dlist})
 
 # In some rare occasions, the answer could be empty. Remove those rows:
 df = df[df["text"] != ""]
+# also remove rows with empty questions:
+df = df[df["question"] != ""]
+
 df.to_csv("data/tcfd_output.csv", index=False)
