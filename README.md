@@ -78,3 +78,8 @@ pytest ./minipackage/tests
 - [x] Train ClimateBERT for downstream task 1 (factchecking)
 - [x] Train ClimateBERT for downstream task 2 (TCFD classification)
 - [x] Generate a documentation website for `climate-plus`
+
+## References
+
+- [ClimateBert](https://climatebert.ai/), AI powered climate-related corporate disclosure analytics
+- [ClimateBert: A Pretrained Language Model for Climate-Related Text](https://arxiv.org/abs/2110.12010)
