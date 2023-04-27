@@ -78,3 +78,10 @@ exit
     - [ ] Downstream task 2: TCFD disclosure classification
   - [ ] Comparison with benchmarks
   - [ ] Conclusion
+
+## References
+
+- [ClimateBert](https://climatebert.ai/), AI powered climate-related corporate disclosure analytics
+- [ClimateBert: A Pretrained Language Model for Climate-Related Text](https://arxiv.org/abs/2110.12010)
+
+- They have this? <https://github.com/ClimateBert/training-example>
