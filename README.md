@@ -76,5 +76,5 @@ pytest ./minipackage/tests
   - [x] [`climate-fever`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
     - [ ] Update model card
 - [x] Train ClimateBERT for downstream task 1 (factchecking)
-- [ ] Train ClimateBERT for downstream task 2 (TCFD classification)
+- [x] Train ClimateBERT for downstream task 2 (TCFD classification)
 - [x] Generate a documentation website for `climate-plus`
