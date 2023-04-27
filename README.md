@@ -64,22 +64,10 @@ pip install -e ./minipackage
 pytest ./minipackage/tests
 ```
 
-## Todos
-
-- [ ] Prepare datasets compatible with ClimateBERT
-  - [x] TCFD data
-    - [x] Data scraping
-    - [x] Generate sentence-based data using [`chitchat`](https://github.com/rexarski/chitchat) (QA)
-      - [x] pdf parser
-    - [x] Convert to a datasets object
-    - [x] Update model card of [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
-  - [x] [`climate-fever`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
-    - [ ] Update model card
-- [x] Train ClimateBERT for downstream task 1 (factchecking)
-- [x] Train ClimateBERT for downstream task 2 (TCFD classification)
-- [x] Generate a documentation website for `climate-plus`
-
 ## References
 
 - [ClimateBert](https://climatebert.ai/), AI powered climate-related corporate disclosure analytics
 - [ClimateBert: A Pretrained Language Model for Climate-Related Text](https://arxiv.org/abs/2110.12010)
+- [`chitchat`](https://github.com/rexarski/chitchat)
+- [`climate_fever_fixed`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
+- [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
