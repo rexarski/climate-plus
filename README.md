@@ -64,6 +64,43 @@ pip install -e ./minipackage
 pytest ./minipackage/tests
 ```
 
+## Model training
+
+|        Downstream Task         |               File                |      Base Model      |                Data Set                 |   Accuracy    |   F1 Score    |
+| :----------------------------: | :-------------------------------: | :------------------: | :-------------------------------------: | :-----------: | :-----------: |
+|          Factchecking          | `trainer/factchecking_trainer.py` | `bert-base-uncased`  |          `climate_fever_fixed`          | 0.7158 (test) | 0.6015 (test) |
+| TCFD disclosure classification |   `trainer/tcfd_trainer.ipynb`    | `distilroberta-base` |    `TCFD_disclosure` (11 subclasses)    | 0.3667 (test) |       -       |
+| TCFD disclosure classification |   `trainer/tcfd_trainer2.ipynb`   |  `distilbert-base`   | `training_data.json` (4 classes + None) | 0.8155 (test) |       -       |
+
+## Demo
+
+- Factchecking
+  - Example 1
+    - **Claim**: Sea ice has diminished much faster than scientists and climate models anticipated.
+    - **Evidence**: Past models have underestimated the rate of Arctic shrinkage and underestimated the rate of precipitation increase.
+    - **Label**: `SUPPORTS`
+    - **Prediction**: `SUPPORTS` ✅
+  - Example 2
+    - **Claim**: Climate Models Have Overestimated Global Warming
+    - **Evidence**: The 2017 United States-published National Climate Assessment notes that "climate models may still be underestimating or missing relevant feedback processes".
+    - **Label**: `SUPPORTS`
+    - **Prediction**: `REFUTES` ❌
+  - Example 3
+    - **Claim**: Climate skeptics argue temperature records have been adjusted in recent years to make the past appear cooler and the present warmer, although the Carbon Brief showed that NOAA has actually made the past warmer, evening out the difference.
+    - **Evidence**: Reconstructions have consistently shown that the rise in the instrumental temperature record of the past 150 years is not matched in earlier centuries, and the name "hockey stick graph" was coined for figures showing a long-term decline followed by an abrupt rise in temperatures.
+    - **Label**: `NOT_ENOUGH_INFO`
+    - **Prediction**: `NOT_ENOUGH_INFO` ✅
+  - Example 4
+    - **Claim**: Humans are too insignificant to affect global climate.
+    - **Evidence**: Human impact on the environment or anthropogenic impact on the environment includes changes to biophysical environments and ecosystems, biodiversity, and natural resources caused directly or indirectly by humans, including global warming, environmental degradation (such as ocean acidification), mass extinction and biodiversity loss, ecological crisis, and ecological collapse.
+    - **Label**: `REFUTES`
+    - **Prediction**: `REFUTES` ✅
+- TCFD disclosure classification
+  - Example 1
+  - Example 2
+  - Example 3
+  - Example 4
+
 ## References
 
 - [ClimateBert](https://climatebert.ai/), AI powered climate-related corporate disclosure analytics
