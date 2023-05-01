@@ -66,12 +66,16 @@ pytest ./minipackage/tests
 
 ## Model training
 
-|        Downstream task         |               File                |      Base model      |                    Data set                    | Accuracy | F1 score |
-| :----------------------------: | :-------------------------------: | :------------------: | :--------------------------------------------: | :------: | :------: |
-|          Factchecking          | `trainer/factchecking_trainer.py` | `bert-base-uncased`  |             `climate_fever_fixed`              |  0.7158  |  0.6015  |
-| TCFD disclosure classification |   `trainer/tcfd_trainer.ipynb`    | `distilroberta-base` |       `TCFD_disclosure` (11 subclasses)        |  0.3667  |  0.3333  |
-| TCFD disclosure classification |   `trainer/tcfd_trainer.ipynb`    | `distilroberta-base` | `TCFD_disclosure` (11 subclasses -> 4 classes) |  0.8333  |  0.7771  |
-| TCFD disclosure classification |   `trainer/tcfd_11_trainer.py`    | `distilroberta-base` |    `training_data.json` (4 classes + None)     |  0.8075  |  0.6268  |
+|        Downstream task         |                                 File                                 |      Base model      |                                                    Data set                                                    |                                              End model                                               | Accuracy | F1 score |
+| :----------------------------: | :------------------------------------------------------------------: | :------------------: | :------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :------: | :------: |
+|          Factchecking          | [`trainer/factchecking_trainer.py`](trainer/factchecking_trainer.py) | `bert-base-uncased`  |             [`climate_fever_fixed`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)              |   [`bert-base-climate-fever-fixed`](https://huggingface.co/rexarski/bert-base-climate-fever-fixed)   |  0.7158  |  0.6015  |
+| TCFD disclosure classification |      [`trainer/tcfd_11_trainer.py`](trainer/tcfd_11_trainer.py)      | `distilroberta-base` |         [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure) (11 subclasses)          |   [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)   |  0.3667  |  0.3333  |
+| TCFD disclosure classification |      [`trainer/tcfd_11_trainer.py`](trainer/tcfd_11_trainer.py)      | `distilroberta-base` | [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)[^1] (11 subclasses -> 4 classes) |   [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)   |  0.8333  |  0.7771  |
+| TCFD disclosure classification |       [`trainer/tcfd_5_trainer.py`](trainer/tcfd_5_trainer.py)       | `distilroberta-base` |                    [`training_data.json`](data/training_data.json)[^2] (4 classes + `None`)                    | [`distilroberta-tcfd-disclosure-5`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure-5) |  0.8075  |  0.6268  |
+
+[^1]: Essentially, this is the same model as the previous one, but the evaluation metrics are calculated based on a "loose" version of "correct prediction". Basically, if the prediction of a subcategory falls into the same category as the true label, then it is considered as a correct one.
+
+[^2]: `training_data.json` contains 50k text sequences annotated with 5 classes (4 TCFD categories + "None"). It was used by the ClimateBERT team in their draft notebook [`training-example`](https://github.com/ClimateBert/training-example).
 
 ## Demo
 
@@ -113,6 +117,12 @@ pytest ./minipackage/tests
     - **Text**: AXA created a Group-level Responsible Investment Committee (RIC), chaired by the Group Chief Investment Officer, and including representatives from AXA Asset Management entities, representatives of Corporate Responsibility (CR), Risk Management and Group Communication.
     - **Label**: `Goverance b)`
     - **Prediction**: `Goverance b)` ✅
+
+## Limitation
+
+- Limited number of training data, especially for TCFD disclosure classification (fewer than 600 samples)
+- For TCFD's task, the model is trained on a dataset without any non-climate related data, which is kind of unrealistic in real-world scenarios.
+  - **Future improvement**: populate the dataset with non-climate related data (resembling the `None` label in `training_data.json`.)
 
 ## References
 
