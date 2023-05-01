@@ -88,8 +88,8 @@ pytest ./minipackage/tests
   - Example 2
     - **Claim**: Climate Models Have Overestimated Global Warming
     - **Evidence**: The 2017 United States-published National Climate Assessment notes that "climate models may still be underestimating or missing relevant feedback processes".
-    - **Label**: `SUPPORTS`
-    - **Prediction**: `REFUTES` ❌
+    - **Label**: `REFUTES`
+    - **Prediction**: `SUPPORTS` ❌
   - Example 3
     - **Claim**: Climate skeptics argue temperature records have been adjusted in recent years to make the past appear cooler and the present warmer, although the Carbon Brief showed that NOAA has actually made the past warmer, evening out the difference.
     - **Evidence**: Reconstructions have consistently shown that the rise in the instrumental temperature record of the past 150 years is not matched in earlier centuries, and the name "hockey stick graph" was coined for figures showing a long-term decline followed by an abrupt rise in temperatures.
@@ -115,8 +115,8 @@ pytest ./minipackage/tests
     - **Prediction**: `Risk Management a)` ❌
   - Example 4
     - **Text**: AXA created a Group-level Responsible Investment Committee (RIC), chaired by the Group Chief Investment Officer, and including representatives from AXA Asset Management entities, representatives of Corporate Responsibility (CR), Risk Management and Group Communication.
-    - **Label**: `Goverance b)`
-    - **Prediction**: `Goverance b)` ✅
+    - **Label**: `Governance b)`
+    - **Prediction**: `Governance b)` ✅
 
 ## Limitation
 
