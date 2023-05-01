@@ -66,11 +66,12 @@ pytest ./minipackage/tests
 
 ## Model training
 
-|        Downstream Task         |               File                |      Base Model      |                Data Set                 |   Accuracy    |   F1 Score    |
-| :----------------------------: | :-------------------------------: | :------------------: | :-------------------------------------: | :-----------: | :-----------: |
-|          Factchecking          | `trainer/factchecking_trainer.py` | `bert-base-uncased`  |          `climate_fever_fixed`          | 0.7158 (test) | 0.6015 (test) |
-| TCFD disclosure classification |   `trainer/tcfd_trainer.ipynb`    | `distilroberta-base` |    `TCFD_disclosure` (11 subclasses)    | 0.3667 (test) |       -       |
-| TCFD disclosure classification |   `trainer/tcfd_trainer2.ipynb`   |  `distilbert-base`   | `training_data.json` (4 classes + None) | 0.8155 (test) |       -       |
+|        Downstream task         |               File                |      Base model      |                    Data set                    | Accuracy | F1 score |
+| :----------------------------: | :-------------------------------: | :------------------: | :--------------------------------------------: | :------: | :------: |
+|          Factchecking          | `trainer/factchecking_trainer.py` | `bert-base-uncased`  |             `climate_fever_fixed`              |  0.7158  |  0.6015  |
+| TCFD disclosure classification |   `trainer/tcfd_trainer.ipynb`    | `distilroberta-base` |       `TCFD_disclosure` (11 subclasses)        |  0.3667  |  0.3333  |
+| TCFD disclosure classification |   `trainer/tcfd_trainer.ipynb`    | `distilroberta-base` | `TCFD_disclosure` (11 subclasses -> 4 classes) |  0.8333  |  0.7771  |
+| TCFD disclosure classification |   `trainer/tcfd_11_trainer.py`    | `distilroberta-base` |    `training_data.json` (4 classes + None)     |  0.8075  |  0.6268  |
 
 ## Demo
 
@@ -97,14 +98,31 @@ pytest ./minipackage/tests
     - **Prediction**: `REFUTES` ✅
 - TCFD disclosure classification
   - Example 1
+    - **Text**: As a global provider of transport and logistics services, we are often called on for expert input and industry insights by government representatives.
+    - **Label**: `Risk Management a)`
+    - **Prediction**: `Metrics and Targets` ❌
   - Example 2
+    - **Text**: There are no sentences in the provided excerpts that disclose Scope 1 and Scope 2, and, if appropriate Scope 3 GHG emissions. The provided excerpts focus on other metrics and targets related to social impact investing, assets under management, and carbon footprint calculations.
+    - **Label**: `Metrics and Targets b)`
+    - **Prediction**: `Metrics and Targets a)`  🔧
   - Example 3
+    - **Text**: Our strategy needs to be resilient under a range of climate-related scenarios. This year we have undertaken climate-related scenario testing of a select group of customers in the thermal coal supply chain. We assessed these customers using two of the International Energy Agency’s scenarios; the ‘New Policies Scenario’ and the ‘450 Scenario’. Our reporting reflects the Financial Stability Board’s (FSB) Task Force on Climate-Related Disclosures (TCFD) recommendations. Using the FSB TCFD’s disclosure framework, we have begun discussions with some of our customers in emissions-intensive industries. The ESG Committee is responsible for reviewing and approving our climate change-related objectives, including goals and targets. The Board Risk Committee has formal responsibility for the overview of ANZ’s management of new and emerging risks, including climate change-related risks.
+    - **Label**: `Strategy c)`
+    - **Prediction**: `Risk Management a)` ❌
   - Example 4
+    - **Text**: AXA created a Group-level Responsible Investment Committee (RIC), chaired by the Group Chief Investment Officer, and including representatives from AXA Asset Management entities, representatives of Corporate Responsibility (CR), Risk Management and Group Communication.
+    - **Label**: `Goverance b)`
+    - **Prediction**: `Goverance b)` ✅
 
 ## References
 
 - [ClimateBert](https://climatebert.ai/), AI powered climate-related corporate disclosure analytics
 - [ClimateBert: A Pretrained Language Model for Climate-Related Text](https://arxiv.org/abs/2110.12010)
 - [`chitchat`](https://github.com/rexarski/chitchat)
-- [`climate_fever_fixed`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
-- [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
+- Datasets
+  - [`climate_fever_fixed`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)
+  - [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)
+- Model
+  - [`bert-base-climate-fever-fixed`](https://huggingface.co/rexarski/bert-base-climate-fever-fixed)
+  - [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)
+  - [`distilroberta-tcfd-disclosure-5`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure-5)
