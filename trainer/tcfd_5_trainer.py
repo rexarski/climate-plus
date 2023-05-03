@@ -409,7 +409,7 @@ y = []
 
 print(f"Test accuracy: {np.mean(df.label == df.pred_class):.4f}")
 print(
-    f"Test F1 score: {f1_score(df.label, df.pred_class, average='macro'):.4f}"
+    f"Test F1 score: {f1_score(df.label, df.pred_class, average='weighted'):.4f}"
 )
 
 # Test accuracy: 0.8075

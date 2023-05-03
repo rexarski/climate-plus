@@ -437,7 +437,7 @@ print(
 )
 
 print(
-    f"Test F1 score: {f1_score(df.label, df.pred_class, average='macro'):.4f}"
+    f"Test F1 score: {f1_score(df.label, df.pred_class, average='weighted'):.4f}"
 )
 print(
     f"Test F1 score (loose): {f1_score(df.label_loose, df.pred_class_loose, average='macro'):.4f}"

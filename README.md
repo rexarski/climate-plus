@@ -66,12 +66,12 @@ pytest ./minipackage/tests
 
 ## Model training
 
-|        Downstream task         |                                 File                                 |      Base model      |                                                    Data set                                                    |                                              End model                                               | Accuracy | F1 score |
-| :----------------------------: | :------------------------------------------------------------------: | :------------------: | :------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :------: | :------: |
-|          Factchecking          | [`trainer/factchecking_trainer.py`](trainer/factchecking_trainer.py) | `bert-base-uncased`  |             [`climate_fever_fixed`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)              |   [`bert-base-climate-fever-fixed`](https://huggingface.co/rexarski/bert-base-climate-fever-fixed)   |  0.7158  |  0.6015  |
-| TCFD disclosure classification |      [`trainer/tcfd_11_trainer.py`](trainer/tcfd_11_trainer.py)      | `distilroberta-base` |         [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure) (11 subclasses)          |   [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)   |  0.3667  |  0.3333  |
-| TCFD disclosure classification |      [`trainer/tcfd_11_trainer.py`](trainer/tcfd_11_trainer.py)      | `distilroberta-base` | [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)[^1] (11 subclasses -> 4 classes) |   [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)   |  0.8333  |  0.7771  |
-| TCFD disclosure classification |       [`trainer/tcfd_5_trainer.py`](trainer/tcfd_5_trainer.py)       | `distilroberta-base` |                    [`training_data.json`](data/training_data.json)[^2] (4 classes + `None`)                    | [`distilroberta-tcfd-disclosure-5`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure-5) |  0.8075  |  0.6268  |
+|        Downstream task         |                                 File                                 |      Base model      |                                                    Data set                                                    |                                              End model                                               | Accuracy | Weighted F1 score |
+| :----------------------------: | :------------------------------------------------------------------: | :------------------: | :------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :------: | :---------------: |
+|          Factchecking          | [`trainer/factchecking_trainer.py`](trainer/factchecking_trainer.py) | `bert-base-uncased`  |             [`climate_fever_fixed`](https://huggingface.co/datasets/rexarski/climate_fever_fixed)              |   [`bert-base-climate-fever-fixed`](https://huggingface.co/rexarski/bert-base-climate-fever-fixed)   |  0.7087  |      0.7144       |
+| TCFD disclosure classification |      [`trainer/tcfd_11_trainer.py`](trainer/tcfd_11_trainer.py)      | `distilroberta-base` |         [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure) (11 subclasses)          |   [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)   |  0.3333  |      0.3144       |
+| TCFD disclosure classification |      [`trainer/tcfd_11_trainer.py`](trainer/tcfd_11_trainer.py)      | `distilroberta-base` | [`TCFD_disclosure`](https://huggingface.co/datasets/rexarski/TCFD_disclosure)[^1] (11 subclasses -> 4 classes) |   [`distilroberta-tcfd-disclosure`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure)   |  0.8333  |      0.8246       |
+| TCFD disclosure classification |       [`trainer/tcfd_5_trainer.py`](trainer/tcfd_5_trainer.py)       | `distilroberta-base` |                    [`training_data.json`](data/training_data.json)[^2] (4 classes + `None`)                    | [`distilroberta-tcfd-disclosure-5`](https://huggingface.co/rexarski/distilroberta-tcfd-disclosure-5) |  0.8075  |      0.8013       |
 
 [^1]: Essentially, this is the same model as the previous one, but the evaluation metrics are calculated based on a "loose" version of "correct prediction". Basically, if the prediction of a subcategory falls into the same category as the true label, then it is considered as a correct one.
 
@@ -81,42 +81,42 @@ pytest ./minipackage/tests
 
 - Factchecking
   - Example 1
-    - **Claim**: Sea ice has diminished much faster than scientists and climate models anticipated.
-    - **Evidence**: Past models have underestimated the rate of Arctic shrinkage and underestimated the rate of precipitation increase.
-    - **Label**: `SUPPORTS`
-    - **Prediction**: `SUPPORTS` ✅
-  - Example 2
-    - **Claim**: Climate Models Have Overestimated Global Warming
-    - **Evidence**: The 2017 United States-published National Climate Assessment notes that "climate models may still be underestimating or missing relevant feedback processes".
+    - **Claim**: there is no relationship between temperature and carbon dioxide emissions by Â­humans[...]
+    - **Evidence**: Human activities are now causing atmospheric concentrations of greenhouse gases—including carbon dioxide, methane, tropospheric ozone, and nitrous oxide—to rise well above pre-industrial levels ... Increases in greenhouse gases are causing temperatures to rise ...
     - **Label**: `REFUTES`
-    - **Prediction**: `SUPPORTS` ❌
-  - Example 3
-    - **Claim**: Climate skeptics argue temperature records have been adjusted in recent years to make the past appear cooler and the present warmer, although the Carbon Brief showed that NOAA has actually made the past warmer, evening out the difference.
-    - **Evidence**: Reconstructions have consistently shown that the rise in the instrumental temperature record of the past 150 years is not matched in earlier centuries, and the name "hockey stick graph" was coined for figures showing a long-term decline followed by an abrupt rise in temperatures.
+    - **Prediction**: `REFUTES` ✅
+  - Example 2
+    - **Claim**: The late 1970s marked the end of a 30-year cooling trend.
+    - **Evidence**: During the last 20-30 years, world temperature has fallen, irregularly at first but more sharply over the last decade..
     - **Label**: `NOT_ENOUGH_INFO`
     - **Prediction**: `NOT_ENOUGH_INFO` ✅
+  - Example 3
+    - **Claim**: Even during a period of long term warming, there are short periods of cooling due to climate variability.
+    - **Evidence**: El Niño events cause short-term (approximately 1 year in length) spikes in global average surface temperature while La Niña events cause short term cooling.
+    - **Label**: `SUPPORTS`
+    - **Prediction**: `SUPPORTS` ✅
   - Example 4
     - **Claim**: Humans are too insignificant to affect global climate.
     - **Evidence**: Human impact on the environment or anthropogenic impact on the environment includes changes to biophysical environments and ecosystems, biodiversity, and natural resources caused directly or indirectly by humans, including global warming, environmental degradation (such as ocean acidification), mass extinction and biodiversity loss, ecological crisis, and ecological collapse.
     - **Label**: `REFUTES`
-    - **Prediction**: `REFUTES` ✅
+    - **Prediction**: `NOT_ENOUGH_INFO` ❌
 - TCFD disclosure classification
   - Example 1
-    - **Text**: As a global provider of transport and logistics services, we are often called on for expert input and industry insights by government representatives.
-    - **Label**: `Risk Management a)`
-    - **Prediction**: `Metrics and Targets` ❌
+    - **Text**: 1. Should our products fail to meet energy-efficiency standards and regulations, we will risk losing sales opportunities.
+    - **Label**: `Strategy a)`
+    - **Prediction**: `Strategy a)` ✅
   - Example 2
-    - **Text**: There are no sentences in the provided excerpts that disclose Scope 1 and Scope 2, and, if appropriate Scope 3 GHG emissions. The provided excerpts focus on other metrics and targets related to social impact investing, assets under management, and carbon footprint calculations.
-    - **Label**: `Metrics and Targets b)`
-    - **Prediction**: `Metrics and Targets a)`  🔧
+    - **Text**: There are no sentences in the provided excerpts that describe the targets the company uses to manage climate-related risks or opportunities.
+    - **Label**: `Metrics and Targets c)`
+    - **Prediction**: `Metrics and Targets b)`  🔧
   - Example 3
-    - **Text**: Our strategy needs to be resilient under a range of climate-related scenarios. This year we have undertaken climate-related scenario testing of a select group of customers in the thermal coal supply chain. We assessed these customers using two of the International Energy Agency’s scenarios; the ‘New Policies Scenario’ and the ‘450 Scenario’. Our reporting reflects the Financial Stability Board’s (FSB) Task Force on Climate-Related Disclosures (TCFD) recommendations. Using the FSB TCFD’s disclosure framework, we have begun discussions with some of our customers in emissions-intensive industries. The ESG Committee is responsible for reviewing and approving our climate change-related objectives, including goals and targets. The Board Risk Committee has formal responsibility for the overview of ANZ’s management of new and emerging risks, including climate change-related risks.
-    - **Label**: `Strategy c)`
-    - **Prediction**: `Risk Management a)` ❌
+    - **Text**: Describe how processes for identifying, assessing, and managing climate-related risks are integrated into the organization’s overall risk management.
+    - **Label**: `Risk Management c)`
+    - **Prediction**: `Risk Management b)` 🔧
   - Example 4
-    - **Text**: AXA created a Group-level Responsible Investment Committee (RIC), chaired by the Group Chief Investment Officer, and including representatives from AXA Asset Management entities, representatives of Corporate Responsibility (CR), Risk Management and Group Communication.
-    - **Label**: `Governance b)`
-    - **Prediction**: `Governance b)` ✅
+    - **Text**: Reporting on such risks and opportunities is provided to.
+    - **Label**: `Governance a)`
+    - **Prediction**: `Risk Management a)` ❌
 
 ## Limitation
 

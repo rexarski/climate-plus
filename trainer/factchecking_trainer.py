@@ -407,7 +407,7 @@ def multi_acc(y_pred, y_test):
 def multi_f1(y_pred, y_test):
     y_pred = torch.log_softmax(y_pred, dim=1).argmax(dim=1).cpu().numpy()
     y_test = y_test.cpu().numpy()
-    f1 = f1_score(y_test, y_pred, average="macro")
+    f1 = f1_score(y_test, y_pred, average="weighted")
     return f1
 
 
